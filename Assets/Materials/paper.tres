@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cd2fxjnsghqn7"]
+
+[resource]
+albedo_color = Color(0.999999, 0.998944, 0.852663, 1)
+backlight_enabled = true
+backlight = Color(0.283509, 0.146116, 0.429383, 1)

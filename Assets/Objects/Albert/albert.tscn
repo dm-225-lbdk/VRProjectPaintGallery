@@ -1,0 +1,232 @@
+[gd_scene load_steps=20 format=3 uid="uid://b5tv8sa4ph0sr"]
+
+[ext_resource type="Script" path="res://Scripts/Albert.cs" id="1_ssygv"]
+[ext_resource type="Material" uid="uid://d2lkf4g6g4eap" path="res://Assets/Materials/picture.tres" id="1_wafcc"]
+[ext_resource type="Material" uid="uid://bt85cg6sb6jtq" path="res://Assets/Materials/wallsMaterial.tres" id="2_mi7fr"]
+[ext_resource type="PackedScene" uid="uid://dxscr2rt5kvvy" path="res://Assets/Objects/Albert/holst.tscn" id="2_p1g0i"]
+[ext_resource type="Material" uid="uid://bl87nh4605sc" path="res://Assets/Materials/like.tres" id="4_w28ws"]
+[ext_resource type="AudioStream" uid="uid://4qpcjbjrha7t" path="res://Assets/paint-brush-2-43169.mp3" id="6_kpbiw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_iuskv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8m5mf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_af28p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vstum"]
+size = Vector3(1.5575, 1, 1)
+
+[sub_resource type="Animation" id="Animation_4wot7"]
+resource_name = "inArea"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.024, 0.377, 0, 0.4, 1, -0.024, 0.652, 0)
+
+[sub_resource type="Animation" id="Animation_624fk"]
+resource_name = "outArea"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.024, 0.652, 0, 0.4, 1, -0.024, 0.377, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0g6w"]
+_data = {
+"inArea": SubResource("Animation_4wot7"),
+"outArea": SubResource("Animation_624fk")
+}
+
+[sub_resource type="Animation" id="Animation_60hsr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioStreamPlayer3D:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.834]
+}
+
+[sub_resource type="Animation" id="Animation_qrtnm"]
+resource_name = "click"
+length = 2.0
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PressGlobe")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 0.6, 1, 2.5, 2.5, 2.5)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PressGlobe:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.7, 1.6),
+"transitions": PackedFloat32Array(1, 0.999999, 1),
+"update": 0,
+"values": [1.0, 0.05, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AudioStreamPlayer3D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../AudioStreamPlayer3D:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8.834, -12.788]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4ias"]
+_data = {
+"RESET": SubResource("Animation_60hsr"),
+"click": SubResource("Animation_qrtnm")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwta5"]
+size = Vector3(0.795258, 1.72925, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0vval"]
+lightmap_size_hint = Vector2i(17, 9)
+flip_faces = true
+uv2_padding = 2.13
+
+[sub_resource type="TextMesh" id="TextMesh_c8366"]
+material = ExtResource("4_w28ws")
+text = "Press E to draw"
+
+[node name="Albert" type="Node3D"]
+
+[node name="Paper" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0967254, -0.253809, 0, 0.0253809, 0.967254, 0, 0, 0, 1, -4.94323e-06, 3.83146e-05, 0)
+material_override = ExtResource("1_wafcc")
+mesh = SubResource("BoxMesh_iuskv")
+
+[node name="Node3D" parent="Paper" instance=ExtResource("2_p1g0i")]
+transform = Transform3D(-4.19629e-08, 9.15528e-07, 0.96, 0, 0.96, -9.15528e-07, -0.96, -4.0019e-14, -4.19629e-08, 0.558713, -0.00364793, 0)
+
+[node name="Legs" type="Node3D" parent="."]
+transform = Transform3D(0.967254, -0.253809, 0, 0.253809, 0.967254, 0, 0, 0, 1, 0.0662351, 0.0174198, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Legs"]
+transform = Transform3D(0.0562558, -0.0228721, 0.00878099, 0.00254004, 1.04116, -0.0492546, -0.00311919, 0.43534, 0.118259, -0.183809, -0.77874, -0.195956)
+material_override = ExtResource("1_wafcc")
+mesh = SubResource("BoxMesh_8m5mf")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Legs"]
+transform = Transform3D(-0.0563321, 0.055139, 1.79e-08, 0.00254353, 1.04082, -0.0493462, -0.00105878, -0.433253, -0.118547, -0.184, -0.779, 0.196)
+material_override = ExtResource("1_wafcc")
+mesh = SubResource("BoxMesh_8m5mf")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Legs"]
+transform = Transform3D(0.0484936, 0.576323, 0, -0.0287969, 0.970523, 0, 0, 0, 0.128407, -0.472657, -0.748108, 0)
+material_override = ExtResource("1_wafcc")
+mesh = SubResource("BoxMesh_8m5mf")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Legs"]
+transform = Transform3D(0.0570478, -2.98023e-08, 0, -9.31323e-10, 1.45604, 0, 0, 0, 0.116899, -0.137418, 0, 0)
+material_override = ExtResource("1_wafcc")
+mesh = SubResource("BoxMesh_8m5mf")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Legs"]
+transform = Transform3D(-2.23517e-08, -0.09, 0, 0.345, -3.72529e-09, 0, 0, 0, 0.345, -0.213275, -0.22129, 0)
+material_override = ExtResource("1_wafcc")
+mesh = SubResource("CylinderMesh_af28p")
+skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_ssygv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.26, 0, 0, 0, 1.26, 0, 0, 0, 1.26, 0.351222, 0.272277, 0)
+shape = SubResource("BoxShape3D_vstum")
+
+[node name="AreaAnimation" type="AnimationPlayer" parent="Area3D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_i0g6w")
+}
+
+[node name="ClickAnimation" type="AnimationPlayer" parent="Area3D"]
+libraries = {
+"": SubResource("AnimationLibrary_a4ias")
+}
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.829402, 0, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.797929, -0.364624, 0)
+shape = SubResource("BoxShape3D_fwta5")
+
+[node name="PressGlobe" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+transparency = 1.0
+cast_shadow = 0
+mesh = SubResource("SphereMesh_0vval")
+surface_material_override/0 = ExtResource("2_mi7fr")
+
+[node name="Text" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.253758, 0.967268, 0, 0.967268, 0.253758, -1, 1.10921e-08, -4.22806e-08, -0.024, 0.377, 0)
+transparency = 1.0
+mesh = SubResource("TextMesh_c8366")
+skeleton = NodePath("../Area3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_kpbiw")
+volume_db = 8.834

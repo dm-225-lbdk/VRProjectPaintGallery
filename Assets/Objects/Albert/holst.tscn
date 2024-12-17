@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxscr2rt5kvvy"]
+
+[ext_resource type="Material" uid="uid://cd2fxjnsghqn7" path="res://Assets/Materials/paper.tres" id="2_hj8ri"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_8dsi2"]
+resource_local_to_scene = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_hj8ri")
+mesh = SubResource("QuadMesh_8dsi2")

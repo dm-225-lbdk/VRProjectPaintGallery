@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d2lkf4g6g4eap"]
+
+[resource]
+albedo_color = Color(0.599947, 0.31971, 0.233836, 1)
+heightmap_scale = 6.952
+subsurf_scatter_strength = 1.0
+backlight_enabled = true
+backlight = Color(4.71681e-06, 0.566164, 0.871262, 1)
+refraction_scale = 0.08

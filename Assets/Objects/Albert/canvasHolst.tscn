@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbxo8qtbp41gv"]
+
+[ext_resource type="PackedScene" uid="uid://8qbu5lfiv85q" path="res://Assets/Objects/black_frame#0000.fbx" id="1_g1yjb"]
+[ext_resource type="PackedScene" uid="uid://dxscr2rt5kvvy" path="res://Assets/Objects/Albert/holst.tscn" id="2_ce4tn"]
+[ext_resource type="Script" path="res://Scripts/CantoPicture.cs" id="3_k8l0u"]
+[ext_resource type="Material" uid="uid://bl87nh4605sc" path="res://Assets/Materials/like.tres" id="4_vup7u"]
+[ext_resource type="AudioStream" uid="uid://d1n4v2hvagix2" path="res://Assets/coins-135571.mp3" id="5_32vxg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0k2hb"]
+size = Vector3(1, 0.447876, 1)
+
+[sub_resource type="Curve" id="Curve_20tvx"]
+_data = [Vector2(0.0163934, 1), 0.0, 0.0, 0, 0, Vector2(0.258197, 0.21978), 0.0, 0.0, 0, 0, Vector2(0.471311, 0.637363), 0.0, 0.0, 0, 0, Vector2(0.696721, 0.285714), 0.0, 0.0, 0, 0, Vector2(1, 0.296703), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_tbcli"]
+curve = SubResource("Curve_20tvx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqocw"]
+lifetime_randomness = 0.45
+emission_shape_scale = Vector3(3.49, 2.905, 0.855)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_tbcli")
+turbulence_noise_scale = 2.195
+
+[sub_resource type="TextMesh" id="TextMesh_lutp4"]
+text = "♡"
+font_size = 57
+pixel_size = 0.0154
+curve_step = 2.2
+depth = 0.32
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Root Scene" parent="." instance=ExtResource("1_g1yjb")]
+
+[node name="Node3D" parent="Root Scene" instance=ExtResource("2_ce4tn")]
+transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, 0, 0.385, -0.648377)
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("3_k8l0u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.615, 0, 0, 0, 5.95, 0, 0, 0, 0.54, 0, -0.00331236, -0.395751)
+shape = SubResource("BoxShape3D_0k2hb")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Area3D"]
+transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0.275, -0.456)
+material_override = ExtResource("4_vup7u")
+cast_shadow = 0
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_mqocw")
+draw_pass_1 = SubResource("TextMesh_lutp4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area3D"]
+stream = ExtResource("5_32vxg")

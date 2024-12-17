@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bth1wwi5d7gdw"]
+
+[ext_resource type="Script" path="res://Scripts/patch.cs" id="1_h12n2"]
+[ext_resource type="Texture2D" uid="uid://7y17i7qrjc0p" path="res://Assets/Objects/paint.png" id="1_jkijr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ovs4"]
+size = Vector3(1, 4.86761, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Patch" type="Sprite3D" parent="."]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0, 0.0729504, 0)
+pixel_size = 0.0185
+axis = 1
+double_sided = false
+texture = ExtResource("1_jkijr")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.214067, 0)
+script = ExtResource("1_h12n2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20987, 0)
+shape = SubResource("BoxShape3D_0ovs4")
